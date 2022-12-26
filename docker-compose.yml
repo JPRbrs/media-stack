@@ -74,9 +74,9 @@ services:
       - 51413:51413
       - 51413:51413/udp
     volumes:
-      - tx-config:/config
-      - torrent-downloads:/downloads
-      - tx-watch:/watch
+      - tx-config:/media/backup/media-stack/config
+      - torrent-downloads:/media/backup/media-stack/downloads
+      - tx-watch:/media/backup/media-stack/watch
     restart: "unless-stopped"
 
   ## Default credentials - Username: admin password: adminadmin ##
@@ -97,8 +97,8 @@ services:
       - TZ=UTC
       - WEBUI_PORT=5080
     volumes:
-      - qbittorrent-config:/config
-      - torrent-downloads:/downloads
+      - qbittorrent-config:/media/backup/media-stack/config
+      - torrent-downloads:/media/backup/media-stack/downloads
 
     ## Uncomment below ports if VPN is disabled.
     # ports:
@@ -119,8 +119,8 @@ services:
     ports:
       - 7878:7878
     volumes:
-      - radarr-config:/config
-      - torrent-downloads:/downloads
+      - radarr-config:/media/backup/media-stack/config
+      - torrent-downloads:/media/backup/media-stack/downloads
     restart: "unless-stopped"
 
   sonarr:
@@ -134,8 +134,8 @@ services:
       - PGID=1000
       - TZ=UTC
     volumes:
-      - sonarr-config:/config
-      - torrent-downloads:/downloads
+      - sonarr-config:/media/backup/media-stack/config
+      - torrent-downloads:/media/backup/media-stack/downloads
     ports:
       - 8989:8989
     restart: unless-stopped
@@ -151,8 +151,8 @@ services:
       - PGID=1000
       - TZ=UTC
     volumes:
-      - jackett-config:/config
-      - jackett-blackhole:/downloads
+      - jackett-config:/media/backup/media-stack/config
+      - jackett-blackhole:/media/backup/media-stack/downloads
     ports:
       - 9117:9117
     restart: unless-stopped
@@ -172,7 +172,7 @@ services:
       - PGID=1000
       - TZ=UTC
     volumes:
-      - prowlarr-config:/config
+      - prowlarr-config:/media/backup/media-stack/config
     ## Uncomment below ports if VPN is disabled.
     # ports:
     #   - 9696:9696
@@ -189,8 +189,8 @@ services:
       - PGID=1000
       - TZ=UTC
     volumes:
-      - jellyfin-config:/config
-      - torrent-downloads:/data
+      - jellyfin-config:/media/backup/media-stack/config
+      - torrent-downloads:/media/backup/media-stack/data
   # devices:
    #  - /dev/videoN:/dev/videoN # Mount GPU device 
     ports:
@@ -198,18 +198,6 @@ services:
       - 7359:7359/udp
       - 8920:8920
     restart: unless-stopped
-
-volumes:
-  torrent-downloads:
-  radarr-config:
-  sonarr-config:
-  jackett-config:
-  jackett-blackhole:
-  prowlarr-config:
-  jellyfin-config:
-  qbittorrent-config:
-  tx-config:
-  tx-watch:
 
 networks:
   mynetwork:
